@@ -10,7 +10,7 @@ This section explains how to run this repository from scratch. The process inclu
 3. Upload Arduino code to ESP32
 4. Run the micro-ROS Agent
 5. Publish ROS2 messages
-6. Visualize communication using `rqt_graph`
+6. Visualize communication using `rqt_graph.`
 
 These instructions assume **Ubuntu 22.04 and ROS2 Humble**.
 
@@ -91,6 +91,31 @@ source install/local_setup.bash
 ```
 
 ---
+---
+
+# 3. Clone This Repository
+
+Open a terminal and run:
+
+```
+git clone https://github.com/saeed-5340/Ros2-and-ESP32-Communication-Using-Micro-Ros_And_blink_LED.git
+```
+
+Move into the repository folder:
+
+```
+colcon build --symlink-install
+```
+
+This repository contains the Arduino program used in this tutorial.
+
+Main file:
+
+```
+source install/setup.bash
+```
+---
+
 
 # 3. Create and Build the micro-ROS Agent
 
@@ -227,7 +252,11 @@ ros2 topic list
 Publish message to control LED:
 
 ```
-ros2 topic pub /led_control std_msgs/msg/Int32 "{data: 1}"
+ros2 topic pub /blink_led std_msgs/msg/Int32 "{data: 1}"
+```
+or
+```
+ ros2 run led_blink_package blink_led_node 
 ```
 
 LED behavior:
@@ -270,7 +299,12 @@ ros2 run micro_ros_agent micro_ros_agent serial --dev /dev/ttyUSB0
 
 ```
 source /opt/ros/humble/setup.bash
-ros2 topic pub /led_control std_msgs/msg/Int32 "{data: 1}"
+ros2 topic pub /blink_led std_msgs/msg/Int32 "{data: 1}"
+```
+or
+```
+source /opt/ros/humble/setup.bash
+ros2 run led_blink_package blink_led_node 
 ```
 
 ### Terminal 3 — Visualization
